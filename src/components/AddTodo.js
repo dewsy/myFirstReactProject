@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import TodoItem from "./TodoItem";
+import {Subscribe} from "unstated";
+import TodoContainer from './containers/TodoContainer'
 
-export class AddTodo extends Component{
+export class AddTodo extends Component {
+
     state = {
         title: ''
     };
@@ -12,29 +13,28 @@ export class AddTodo extends Component{
     };
 
     onSubmit = (e) => {
-      e.preventDefault();
-      this.props.addTodo(this.state.title);
-      this.setState({title: ''});
+        e.preventDefault();
+        TodoContainer.addTodo(this.state.title);
+        this.setState({title: ''});
     };
 
 
     render() {
         return (
-            <form onSubmit={this.onSubmit} style={{display: "flex"}}>
-                <input type="text" name="title" placeholder="Add todo..."
-                       style={{flex: "10", padding: '5px'}}
-                       value={this.state.title}
-                       onChange={this.onChange}
-                />
-                <input type="submit" value="Submit" className='btn' style={{flex: "1"}}/>
-            </form>
+            <Subscribe to={[TodoContainer]}>
+                <form onSubmit={this.onSubmit} style={{display: "flex"}}>
+                    <input type="text" name="title" placeholder="Add todo..."
+                           style={{flex: "10", padding: '5px'}}
+                           value={this.state.title}
+                           onChange={this.onChange}
+                    />
+                    <input type="submit" value="Submit" className='btn' style={{flex: "1"}}/>
+                </form>
+            </Subscribe>
         )
-    }
+    };
 
 }
 
-TodoItem.propTypes= {
-    addTodo: PropTypes.func.isRequired,
-};
-
 export default AddTodo;
+

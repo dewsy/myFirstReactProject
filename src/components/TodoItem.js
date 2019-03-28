@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {Subscribe} from "unstated";
+import TodoContainer from './containers/TodoContainer';
 
 
 class TodoItem extends Component {
@@ -11,18 +13,20 @@ class TodoItem extends Component {
                 borderBottom: '1px #ccc dotted',
                 textDecoration: this.props.todo.completed ? 'line-through' : 'none'
             }
-        }
+        };
 
     render() {
         const { id, title } = this.props.todo;
         return (
+            <Subscribe to={TodoContainer}>
             <div style={this.getStyle()}>
                 <p>
-                    <input type="checkbox" onChange={this.props.markComplete.bind(this, id)} /> {" "}
+                    <input type="checkbox" onChange={TodoContainer.markComplete.bind(this, id)} /> {" "}
                     { title }
-                    <button onClick={this.props.delTodo.bind(this, id)} style={xButtonStyle}>x</button>
+                    <button onClick={TodoContainer.delTodo.bind(this, id)} style={xButtonStyle}>x</button>
                 </p>
             </div>
+            </Subscribe>
         );
     }
 }
@@ -30,8 +34,6 @@ class TodoItem extends Component {
 //PropTypes
 TodoItem.propTypes= {
     todo: PropTypes.object.isRequired,
-    markComplete: PropTypes.func.isRequired,
-    delTodo: PropTypes.func.isRequired,
 };
 
 const xButtonStyle = {
