@@ -1,16 +1,12 @@
 import { Container } from 'unstated';
 import axios from "axios";
+import React from "react";
 
 class TodoContainer extends Container {
 
     state = {
         todos : []
     };
-
-    createState(data) {
-        this.setState({todos: data.data})
-    };
-
     //toggles complete
     markComplete = (id) => {
         this.setState({todos: this.state.todos.map(todo => {
