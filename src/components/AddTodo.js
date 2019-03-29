@@ -21,7 +21,6 @@ export class AddTodo extends Component {
 
     render() {
         return (
-            <Subscribe to={[TodoContainer]}>
                 <form onSubmit={this.onSubmit} style={{display: "flex"}}>
                     <input type="text" name="title" placeholder="Add todo..."
                            style={{flex: "10", padding: '5px'}}
@@ -30,7 +29,6 @@ export class AddTodo extends Component {
                     />
                     <input type="submit" value="Submit" className='btn' style={{flex: "1"}}/>
                 </form>
-            </Subscribe>
         )
     };
 

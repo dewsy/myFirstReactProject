@@ -1,14 +1,15 @@
 import { Container } from 'unstated';
 import axios from "axios";
-import React from "react";
 
 class TodoContainer extends Container {
 
     state = {
         todos : []
     };
+
+
     //toggles complete
-    markComplete = (id) => {
+    static markComplete = (id) => {
         this.setState({todos: this.state.todos.map(todo => {
                 if(todo.id === id) {
                     todo.completed = !todo.completed
@@ -18,7 +19,7 @@ class TodoContainer extends Container {
     };
 
     //deletes
-    delTodo = (id) => {
+    static delTodo = (id) => {
         axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
             .then(res => this.setState({todos: [...this.state.todos.filter(todo => todo.id !== id)]
             }) )
@@ -32,7 +33,9 @@ class TodoContainer extends Container {
 
     };
 
-
+    static createState = (e) => {
+        this.setState( (state) => ({todos: e}))
+    }
 
 
 }

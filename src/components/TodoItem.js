@@ -21,7 +21,7 @@ class TodoItem extends Component {
             <Subscribe to={TodoContainer}>
             <div style={this.getStyle()}>
                 <p>
-                    <input type="checkbox" onChange={TodoContainer.markComplete.bind(this, id)} /> {" "}
+                    <input type="checkbox" onChange={ TodoContainer.markComplete.bind(this, id)} /> {" "}
                     { title }
                     <button onClick={TodoContainer.delTodo.bind(this, id)} style={xButtonStyle}>x</button>
                 </p>
